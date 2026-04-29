@@ -7,6 +7,71 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 model = joblib.load('model.pkl')
 scaler = joblib.load('scaler.pkl')
 encoder = joblib.load('encoders.pkl')
+st.markdown("""
+<style>
+
+/* Background utama */
+.stApp {
+    background: linear-gradient(to right, #141e30, #243b55);
+    color: white;
+}
+
+/* Judul */
+h1, h2, h3 {
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+/* Tabs */
+.stTabs [data-baseweb="tab"] {
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+/* DataFrame container */
+[data-testid="stDataFrame"] {
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 8px;
+}
+
+/* Header tabel */
+[data-testid="stDataFrame"] th {
+    background-color: rgba(0, 201, 167, 0.8);
+    color: white;
+}
+
+/* Isi tabel */
+[data-testid="stDataFrame"] td {
+    color: white;
+}
+
+/* Hover effect */
+[data-testid="stDataFrame"] tr:hover td {
+    background-color: rgba(255,255,255,0.08);
+}
+
+/* Button */
+.stButton>button {
+    background-color: #00c9a7;
+    color: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+/* Input */
+.stSelectbox>div, .stTextInput>div>div>input {
+    background-color: #1e293b;
+    color: white;
+    border-radius: 8px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 columns = [
     "age", "workclass", "fnlwgt", "education", "education_num",
@@ -21,8 +86,8 @@ def ambil_data():
     return data
 
 df = ambil_data()
-st.title("Prediksi Pendapatan")
-st.write("Masukkan Data untuk Memprediksi Pendapatan")
+st.markdown("<h1 style='font-size: 55px; text-align: center;'>💰SmartSalary</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-size: 28px;'>PREDICT YOUR INCOME INSTANTLY</h3>", unsafe_allow_html=True)
 
 tab1, tab2, tab3, tab4 = st.tabs(["📂 Dataset",
     "🧹 Preprocessing",
@@ -42,13 +107,13 @@ with tab1:
         "Missing": df.isnull().sum().values
     })
 
-st.dataframe(summary)
+    st.dataframe(summary)
 
-st.subheader("📈 Statistik Data Numerik")
-st.dataframe(df.describe())
+    st.subheader("📈 Statistik Data Numerik")
+    st.dataframe(df.describe())
 
-st.subheader("🔍 Sample Data")
-st.dataframe(df.head(20))
+    st.subheader("🔍 Sample Data")
+    st.dataframe(df.head(20))
 with tab2:
     st.header("Preprocessing Time ⏳")
     st.write("Melakukan preprocessing pada data...")
